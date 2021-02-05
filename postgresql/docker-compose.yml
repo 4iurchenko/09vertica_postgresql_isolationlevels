@@ -1,0 +1,29 @@
+# Use postgres/example user/password credentials
+# Source: https://hub.docker.com/_/postgres
+
+version: '3.1'
+networks:
+  frontend:
+    driver: bridge
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: example
+    networks:
+       - frontend
+    ports:
+      - 5432:5432
+
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - frontend
